@@ -38,10 +38,10 @@
         </div>
       </nav>
       
-
+<form>
       <table class="table table-sm m-5 container-sm table-striped caption-top" id="assets-table" > 
         <div class="d-flex flex-direction-row justify-content-end m-3">
-          <a href="/getAsset" class="btn btn-outline-secondary m-5">Unassigned <i class="fa-solid fa-angles-right"></i></a>
+          <a href="http://localhost:8000/api/assets" class="btn btn-outline-secondary m-5">Unassigned <i class="fa-solid fa-angles-right"></i></a>
 
         </div>
         
@@ -49,26 +49,35 @@
           Assets
         </caption>
         <thead class="table-dark">
+          
           <tr>
             <th scope="col">S.NO.</th>
             <th scope="col">Name</th>
             <th scope="col">Assets</th>
-            <th scope="col">Date</th>
+            <th scope="col">UpDated Date</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <% for (var i = 0; i < user.length;  i++) { %>
+          <% for (var i = 0; i < users.length;  i++) { %>
             <tr>
-              <th scope="row"><%= user[i].id %></th>
-              <td><%= user[i].name %></td>
-              <td><a href="#"><%= user[i].asset %></a></td>
-              <td><%= user[i].date %></td>
-              
-
-            </tr>    
-           <% } %>
+          <td><%= i + 1 %></td>
+          <td><%= users[i].name %></td>
+          <td><%= users[i].createdAt %></td>
+          <td><%= users[i].updatedAt %></td>
+          <td>
+            <a href="/#" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+            <a class="btn border-shadow delete" >
+              <span class="text-gradient"><i class="fas fa-times"></i></span>
+          </a> 
+            </td>
+          </tr>
+          <% } %>
         </tbody>
       </table>
+    </form>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

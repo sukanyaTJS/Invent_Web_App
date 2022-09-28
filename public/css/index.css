@@ -25,12 +25,24 @@
 
 }
 .inputField{
-    border-top: none;
+    width: 420px;
+    padding: 15px;
+    /* border-top: none;
     border-left: none;
-    border-right: none;
-    
+    border-right: none; */
+}
+.text-gradient{
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-
+.descriptionField{
+    padding: 50px;
+}
+.modelField{
+    padding: 20px;
 }
 
 
