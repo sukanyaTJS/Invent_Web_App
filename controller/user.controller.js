@@ -4,7 +4,8 @@ const User = require("../model/user_model");
 exports.create = async (req, res) => {
   //validate request
   if (!req.body) {
-    res.status(400).send({ message: "content can not be empty!" });
+    // res.status(400).send({ message: "content can not be empty!" });
+    res.render("errorPage");
   }
 
   //new user
@@ -25,9 +26,11 @@ exports.create = async (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
-        message: "error occured while creating user details",
-      });
+      // res.status(500).send({
+      //   message: "error occured while creating user details",
+      // });
+      res.render("errorPage");
+
     });
 };
 
@@ -39,18 +42,20 @@ exports.find = (req, res) => {
     User.findById(id)
       .then((data) => {
         if (!data) {
-          res.status(404).send({
-            message: "not found user with id" + id,
-          });
+          // res.status(404).send({
+          //   message: "not found user with id" + id,
+          // });
+          res.render("errorPage");
         } else {
           // res.send(data);
           res.render("index", { users: data });
         }
       })
       .catch((err) => {
-        res.status(500).send({
-          message: "error retriving user with id" + id,
-        });
+        // res.status(500).send({
+        //   message: "error retriving user with id" + id,
+        // });
+        res.render("errorPage");
       });
   } else {
     User.find()
@@ -59,9 +64,11 @@ exports.find = (req, res) => {
         res.render("index", { users: user });
       })
       .catch((err) => {
-        res.status(500).send({
-          message: "erroe occur while retriving user info",
-        });
+        // res.status(500).send({
+        //   message: "erroe occur while retriving user info",
+        // });
+        res.render("errorPage");
+
       });
   }
 };
@@ -69,26 +76,29 @@ exports.find = (req, res) => {
 // update users
 exports.update = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
-      message: "Data to update can not be empty",
-    });
+    // return res.status(400).send({
+    //   message: "Data to update can not be empty",
+    // });
+    res.render("errorPage");
   }
 
   const id = req.params.id;
   User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
-        res.status(404).send({
-          message: `cannot update user with ${id}. May be user not found`,
-        });
+        // res.status(404).send({
+        //   message: `cannot update user with ${id}. May be user not found`,
+        // });
+        res.render("errorPage");
       } else {
         res.send(data);
       }
     })
     .catch((err) => {
-      res.status(500).send({
-        message: "error update user information",
-      });
+      // res.status(500).send({
+      //   message: "error update user information",
+      // });
+      res.render("errorPage");
     });
 };
 
@@ -99,9 +109,10 @@ exports.delete = (req, res) => {
   User.findByIdAndDelete(id)
     .then((data) => {
       if (!data) {
-        res.status(404).send({
-          message: `connot delete with id ${id}.may be id is wrong`,
-        });
+        // res.status(404).send({
+        //   message: `connot delete with id ${id}.may be id is wrong`,
+        // });
+        res.render("errorPage");
       } else {
         res.send({
           message: "user was deleted successfully!",
@@ -109,8 +120,9 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
-        message: "could not delete user with id=" + id,
-      });
+      // res.status(500).send({
+      //   message: "could not delete user with id=" + id,
+      // });
+      res.render("errorPage");
     });
 };
