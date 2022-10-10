@@ -1,18 +1,30 @@
-.nav-heading{
+.navbar{
+    /* position: fixed; */
     background-color: #faec4b;
+    /* overflow: hidden; */
+    width: 100%;
+
 }
-.caption{
-    font-size: 25px;
-    color: black;
+.logo{
+    width:100px;
+    height: 80px;
+}
+.ims-heading{
+    font-size: 35px;
 }
 
-/* .table-container{
-    width: 50%;
-    text-align: center;
-    
-} */
+.caption{
+    font-size: 35px;
+    color: black;
+}
 .table{
     text-align: center;
+}
+.UnassignedBtn{
+    margin-bottom: 10px;
+    margin-right: 60px;
+
+    /* padding-top: 10px; */
 }
 .request-button{
     /* width: 200px; */
@@ -27,9 +39,6 @@
 .inputField{
     width: 420px;
     padding: 15px;
-    /* border-top: none;
-    border-left: none;
-    border-right: none; */
 }
 .text-gradient{
     background: linear-gradient(to right, #8e2de2, #4a00e0);
@@ -44,43 +53,96 @@
 .modelField{
     padding: 20px;
 }
+.clickbtn{
+    width: 300px;
+    height: 200px;
+}
+.UnassignedButton{
+    width: 350px;
+}
+.alert{
+    font-size: 18;
+    font-weight: bold;
+}
+.requesForm{
+    text-align: center;
+}
+.passwordField{
+    width: 250px;
+}
+.inputPassword{
+    font-size: 18;
+    font-weight: 500;
+}
+.historyList{
+    width: 400px;
+    border-width: 5px;
+    border-color: #8e2de2;
+    background-color: pink;
+    margin: 5px;
+}
+.assetBtn{
+    width: 150px;
+    border-radius: 5px;
+    padding: 5px;
+    border-color: grey;
+    border-width: 1px;
+    color: grey;
 
+}
+.assetBtn:hover{ 
+    background-color: #6F7378;
+    color: white;
+       
+}
+.anchorBtn{
+    text-decoration: none;
+    /* color: grey;
+    width: 150px; */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* .anchorBtn:hover {
+    color: white;
+  } */
+.history{
+    margin: 10px auto;
+}
+.historyContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-color: pink; */
+}
+.historyList{
+   
+    padding: 15px;
+    /* width: auto; */
+    background-color: #ABB0B8;
+    border-radius: 5px;
+    list-style-type: none;
+}
+.sideHeading{
+    color: black;
+    font-weight: bold;
+}
+.goBack{
+    margin-left: 55px;
+    
+    /* background-color: #faec4b; */
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.aboutBtn{
+    font-size: 30;
+}
+.tooltip{
+    font-size: 30px !important;
+ }
+ 
 
 
 

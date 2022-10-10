@@ -1,48 +1,15 @@
 const User = require("../model/user_model");
-const Asset = require("../model/assets_model");
-const services = require("../services/render");
-
-
-
-
-// exports.create = async (req, res) => {
-//   console.log("ji");
-
-//   console.log(req.body);
-//   //validate request
-//   if (!req.body) {
-//     res.status(400).send({ message: "content can not be empty!" });
-//   }
-
-//   //new Asset
-//   const newUser = await User.create({
-//     name: req.body.id,
-//     // description: req.body.description,
-//     // createdAt: req.body.createdAt
-//   });
-
-//   if (newUser) {
-//     //res.send(newUser);
-//     res.redirect("/assets");
-//   } else {
-//     res.status(500).send({
-//       message: "error occured while creating Asset details",
-//     });
-//   }
-// };
-
-//////////////////////
 
 //create users or Post
 exports.create = async (req, res) => {
   //validate request
-  console.log(req.body);
   if (!req.body) {
     res.status(400).send({ message: "content can not be empty!" });
   }
 
   //new user
   const allUsers = await User.find();
+  
   const user = new User({
     id: allUsers.length + 1,
     name: req.body.name,
@@ -52,6 +19,7 @@ exports.create = async (req, res) => {
 
   //save user in the database
   user
+
     .save(user)
     .then((data) => {
       res.send(data);
@@ -66,11 +34,13 @@ exports.create = async (req, res) => {
 
 //Get users
 exports.find = (req, res) => {
+
   if (req.query.id) {
     const id = req.query.id;
 
     User.findById(id)
       .then((data) => {
+
         if (!data) {
           res.status(404).send({
             message: "not found user with id" + id,
@@ -89,7 +59,7 @@ exports.find = (req, res) => {
   } else {
     User.find()
       .then((user) => {
-         res.send(user);
+         //res.send(user);
           res.render("index", { users: user });
          
       })
@@ -101,7 +71,7 @@ exports.find = (req, res) => {
   }
 };
 
-//update users
+// update users
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({

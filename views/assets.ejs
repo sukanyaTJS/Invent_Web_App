@@ -22,7 +22,7 @@
       integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -41,33 +41,46 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light nav-heading">
+    <nav class="navbar navbar-light nav mb-4">
       <div
-        class="container-fluid d-flex flex-direction-row justify-content-center"
+        class="container-fluid d-flex flex-direction-row justify-content-between"
       >
-        <h1 class="navbar-brand">Inventory Mangement System</h1>
+        <img
+          src="data:image/jpeg;base64,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"
+        class="logo"/>
+        <h1 class="navbar-brand ims-heading m-auto">Inventory Mangement System</h1>
       </div>
     </nav>
+
     <!-- <form action="/api/users" method="POST" id="create_asset"> -->
-    <div class="d-flex flex-direction-row justify-content-around mt-5 m-3">
-      <div>
-        <a href="/api/users" class="btn btn-outline-secondary"
+    <div
+      class="d-flex flex-direction-row justify-content-around align-items-center pt-4"
+    >
+      <div class="">
+        <a href="/" class="btn btn-outline-secondary"
           ><i class="fa-solid fa-angles-left"></i>Go Home</a
         >
       </div>
 
       <!-- Button trigger modal -->
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
-        Create Asset <i class="fa-solid fa-angles-right"></i>
-      </button>
-
+      <div class="">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Create Asset <i class="fa-solid fa-angles-right"></i>
+        </button>
+      </div>
+    </div>
       <!-- Modal -->
-      <form action="/api/assets" method="POST" id="create_asset">
+      <form
+        action="/api/assets"
+        method="POST"
+        id="create_asset"
+        class="d-flex flex-direction-row justify-content-center"
+      >
         <div
           class="modal fade"
           id="staticBackdrop"
@@ -111,15 +124,6 @@
                     required
                   ></textarea>
                 </div>
-
-                <!-- <div class="modal-body">
-                  <input
-                    name="description"
-                    class="descriptionField"
-                    type="text"
-                    placeholder="Description*"
-                  />
-                </div> -->
               </div>
 
               <div class="modal-footer">
@@ -139,44 +143,89 @@
           </div>
         </div>
       </form>
-    </div>
+    
     <!-- </form> -->
 
     <div
-      class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-5"
+      class="d-flex flex-direction-row justify-content-center align-items-center pt-4 pb-4 m-4"
     >
-      <table class="table m-5 caption-top">
+      <table class="table caption-top table-striped">
         <caption class="caption text-center">
           UnAssigned Assets
         </caption>
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
           <tr>
             <th scope="col">S.NO.</th>
             <th scope="col">Assets</th>
+            <th scope="col">Description</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
           <% for (var i = 0; i < assets.length; i++) { %>
           <tr>
             <td><%= i + 1 %></td>
-            <td><%= assets[i].name %></td>
+            <!-- <td>
+              <button class="assetBtn" >
+               <a  class="anchorBtn" href="/api/usersHistory/<%= assets[i]._id %>"><%= assets[i].name %></a>
+             </button>
+             </td>
+             <td> -->
+
+             <td>
+              <a  class="anchorBtn" href="/api/usersHistory/<%= assets[i]._id %>">
+                <button type="submit" class="assetBtn" >
+                <%= assets[i].name %>
+            </button>
+          </a>
+            </td>
             <td>
+              <button type="button" class="btn btn-secondary aboutBtn" data-toggle="tooltip" data-placement="top" 
+              title="<%= assets[i].description %>" >
+                About
+              </button>
+            </td>
+              <!-- <td>
+                <button
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#asset<%= i + 1 %>"
+                  id="requestBtn"
+                >
+                <%= assets[i].name %>
+                </button>
+              </td> -->
+            
+
+            <td>
+              <% if(assets[i].status === 'waiting'){ %>
               <button
-                class="btn btn-primary p-2 m-2"
+                class="btn btn-outline-secondary"
                 data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop2"
+                data-bs-target="#pending<%= i + 1 %>"
+                id="requestBtn"
+              >
+                Pending
+              </button>
+              <% } else{ %>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop2<%= i + 1 %>"
                 id="requestBtn"
               >
                 Request
               </button>
-            </td>
 
-            <!-- Modal -->
-            <form action="/api/updateAssets" method="POST"  onsubmit="getEmployeeId()" id="employeeId">
+              <% } %>
+            </td>
+            
+
+            <!--Request Modal -->
+            <form action="/api/updateAssets" method="POST">
               <div
-                class="modal fade"
-                id="staticBackdrop2"
+                class="modal fade requesForm"
+                id="staticBackdrop2<%= i + 1 %>"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
                 tabindex="-1"
@@ -187,7 +236,7 @@
                   <div
                     class="modal-content d-flex flex-direction-row justify-content-center"
                   >
-                    <div class="modal-header">
+                    <!-- <div class="modal-header">
                       <h5 class="modal-title" id="staticBackdropLabel">
                         Employee details
                       </h5>
@@ -197,28 +246,29 @@
                         data-bs-dismiss="modal"
                         aria-label="Close"
                       ></button>
-                    </div>
+                    </div> -->
                     <div class="modal-body pt-5">
                       <form class="row">
                         <div class="form-group">
                           <input
                             type="hidden"
                             name="id"
-                            value="<%=assets[i]._id %>"
+                            value="<%=assets[i]._id%>"
                           />
                         </div>
-                        <div class="col-md-8 mb-3">
-                          <label for="validationDefault01" class="form-label"
+                       
+                        <div class="col-md-8 mb-3 m-3 m-auto">
+                          <label for="validationDefault01" class="form-label inputPassword"
                             >Enter Employee ID</label
                           >
                           <input
-                            type="text"
-                            class="form-control"
+                            type="number"
+                            class='passwordField'
+                            class="form-control passwordField"
                             userId="validationDefault01"
                             name="userId"
                             id="id"
-                            value="100"
-                            
+                            autocomplete="off"
                             required
                           />
                         </div>
@@ -233,28 +283,90 @@
                           >
                             Close
                           </button>
-                          <button type="submit"  class="btn btn-primary m-2">
+                          <button type="submit" class="btn btn-primary m-2">
                             Save
                           </button>
                         </div>
-
-                        <!-- <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Submit form</button>
-                      </div> -->
                       </form>
                     </div>
-                    <!-- <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      Save
-                    </button>
-                  </div> -->
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!--Pending Modal -->
+            <form action="/api/updateAssets" method="POST">
+              <div
+                class="modal fade"
+                id="pending<%= i + 1 %>"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="pending"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog ">
+                  <div
+                    class="modal-content d-flex flex-direction-row justify-content-center"
+                  >
+                    <!-- <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">
+                        enter password
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div> -->
+                    <div class="modal-body pt-5">
+                      <form class="row">
+                        <div class="form-group">
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="<%=assets[i]._id%>"
+                          />
+                        </div>
+
+
+                        <div class="col-md-8 mb-3 m-3 m-auto">
+                          <label for="validationDefault01" class="form-label inputPassword"
+                            >Enter password</label
+                          >
+                          <input
+                            type="password"
+                            placeholder="Password"
+                            class="form-control passwordField"
+                            password="validationDefault01"
+                            name="password"
+                            id="password"
+                            
+                            autocomplete="off"
+                            minlength="6" 
+                            required
+
+                          />
+                        </div>
+
+                        <div
+                          class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-4"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary m-2">
+                            Save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -281,3 +393,16 @@
     <script src="/js/assets.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

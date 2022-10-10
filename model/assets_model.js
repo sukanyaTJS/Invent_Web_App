@@ -11,6 +11,7 @@ var schema = new mongoose.Schema({
   },
   description: {
     type: String,
+    required: true,
   },
   status: {
     type: String,
@@ -18,11 +19,29 @@ var schema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    // default: new Date()
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now(),
+    // default: new Date()
+    default: Date.now,
+  },
+  history: {
+    type: Array,
+    id: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    updatedAt: {
+      type: Date,
+      // default: new Date()
+      default: Date.now,
+    },
   },
 });
 
