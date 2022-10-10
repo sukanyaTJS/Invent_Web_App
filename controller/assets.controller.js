@@ -131,7 +131,7 @@ exports.update = async (req, res) => {
         const data = await Asset.findByIdAndUpdate(
           { _id: req.body.id },
           { status: "assigned" },
-          { description: req.body.description },
+          // { description: req.body.description },
           { new: true }
         );
         if (data) {
