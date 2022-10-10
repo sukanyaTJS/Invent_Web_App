@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
 
   //new user
   const allUsers = await User.find();
-  
+
   const user = new User({
     id: allUsers.length + 1,
     name: req.body.name,
@@ -23,7 +23,6 @@ exports.create = async (req, res) => {
     .save(user)
     .then((data) => {
       res.send(data);
-      
     })
     .catch((err) => {
       res.status(500).send({
@@ -34,13 +33,11 @@ exports.create = async (req, res) => {
 
 //Get users
 exports.find = (req, res) => {
-
   if (req.query.id) {
     const id = req.query.id;
 
     User.findById(id)
       .then((data) => {
-
         if (!data) {
           res.status(404).send({
             message: "not found user with id" + id,
@@ -48,7 +45,6 @@ exports.find = (req, res) => {
         } else {
           // res.send(data);
           res.render("index", { users: data });
-
         }
       })
       .catch((err) => {
@@ -59,9 +55,8 @@ exports.find = (req, res) => {
   } else {
     User.find()
       .then((user) => {
-         //res.send(user);
-          res.render("index", { users: user });
-         
+        //res.send(user);
+        res.render("index", { users: user });
       })
       .catch((err) => {
         res.status(500).send({

@@ -31,65 +31,41 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body  >
-
-<div>
-
-  <!-- <div class="goBack">
+  <body>
+    <div>
+      <!-- <div class="goBack">
     <a onclick="history.back()" class="btn btn-outline-secondary"
       ><i class="fa-solid fa-angles-left"></i>Go Back</a
     >
 </div> -->
-  
-  <table
-        class="table container-sm table-striped caption-top"
-        
-      >
-      <div class="goBack">
-        <a onclick="history.back()" class="btn btn-outline-secondary"
-          ><i class="fa-solid fa-angles-left"></i>Go Back</a
-        >
-        <caption class="caption text-center">
-          History
-        </caption>
-    </div>
 
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">S.NO.</th>
-          <th scope="col">Employee Id</th>
-          <th scope="col">Name</th>
-          <th scope="col">Time</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% users.forEach(function (user,i) { %>
-        <td><%= i + 1 %></td>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.createdAt %></td>
+      <table class="table container-sm table-striped caption-top">
+        <div class="goBack">
+          <a onclick="history.back()" class="btn btn-outline-secondary"
+            ><i class="fa-solid fa-angles-left"></i>Go Back</a
+          >
+          <caption class="caption text-center">
+            History
+          </caption>
+        </div>
 
-
-
-      </tbody>
-      <% }) %>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">S.NO.</th>
+            <th scope="col">Employee Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(function (user,i) { %>
+          <td><%= i + 1 %></td>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.createdAt %></td>
+        </tbody>
+        <% }) %>
       </table>
     </div>
-</div>
-
-    <!-- <div class="history ">
-      
-      <ul class="historyContainer">
-        <% users.forEach(function (user) { %>
-        <li class="historyList">
-          <p><span class="sideHeading">Id: </span><%= user.id %></p>
-
-          <p><span class="sideHeading">Name: </span><%= user.name %></p>
-
-          <p><span class="sideHeading">Time: </span><%= user.createdAt%></p>
-        </li>
-        <% }) %>
-      </ul>
-    </div> -->
   </body>
 </html>

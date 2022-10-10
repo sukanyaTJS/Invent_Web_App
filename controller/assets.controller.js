@@ -59,7 +59,7 @@ exports.find = (req, res) => {
       $or: [{ status: "UnAssigned" }, { status: "waiting" }],
     })
       .then((asset) => {
-        console.log(asset)
+        console.log(asset);
         // res.send(asset);
         res.render("assets", { assets: asset });
       })
@@ -86,7 +86,7 @@ exports.getUsers = (req, res) => {
             userName: user.name,
             description: asset[i].description,
             asset: asset[i].name,
-            updatedAt: asset[i].updatedAt.toLocaleString()
+            updatedAt: asset[i].updatedAt.toLocaleString(),
           });
         }
       }
@@ -131,7 +131,7 @@ exports.update = async (req, res) => {
         const data = await Asset.findByIdAndUpdate(
           { _id: req.body.id },
           { status: "assigned" },
-          {description: req.body.description},
+          { description: req.body.description },
           { new: true }
         );
         if (data) {

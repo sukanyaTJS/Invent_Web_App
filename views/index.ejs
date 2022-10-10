@@ -46,7 +46,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    
   </head>
   <body>
     <nav class="navbar navbar-light nav mb-4">
@@ -100,26 +99,29 @@
             <td><%= user.userName %></td>
 
             <td>
-             
-              <a  class="anchorBtn" href="/api/usersHistory/<%= user._id %>">
-                <button type="submit" class="assetBtn" >
-                <%= user.asset %>
-            </button>
-          </a>
+              <a class="anchorBtn" href="/api/usersHistory/<%= user._id %>">
+                <button type="submit" class="assetBtn">
+                  <%= user.asset %>
+                </button>
+              </a>
             </td>
             <td>
               <!-- <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="<%= user.description %>">
                 <button class="btn btn-primary aboutBtn" style="pointer-events: none;" type="top" disabled>About</button>
               </span> -->
-              <button type="button" class="btn btn-secondary aboutBtn" data-toggle="tooltip" data-placement="top" 
-              title="<%= user.description %>" >
+              <button
+                type="button"
+                class="btn btn-secondary aboutBtn"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="<%= user.description %>"
+              >
                 About
               </button>
             </td>
 
             <td><%= user.updatedAt %></td>
             <td>
-              
               <button
                 class="btn btn-outline-secondary"
                 data-bs-toggle="modal"
@@ -128,10 +130,8 @@
               >
                 Click here to Unassign
               </button>
-              
             </td>
 
-            
             <!--Request Modal -->
             <form action="/api/updateAssets" method="POST">
               <div
@@ -142,23 +142,11 @@
                 tabindex="-1"
                 aria-labelledby="pending"
                 aria-hidden="true"
-                
               >
-                <div class="modal-dialog ">
+                <div class="modal-dialog">
                   <div
                     class="modal-content d-flex flex-direction-row justify-content-center"
                   >
-                    <!-- <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">
-                        enter password
-                      </h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div> -->
                     <div class="modal-body pt-5">
                       <form class="row">
                         <div class="form-group">
@@ -169,9 +157,10 @@
                           />
                         </div>
 
-
                         <div class="col-md-8 mb-3 m-3 m-auto">
-                          <label for="validationDefault01" class="form-label inputPassword"
+                          <label
+                            for="validationDefault01"
+                            class="form-label inputPassword"
                             >Enter password</label
                           >
                           <input
@@ -181,11 +170,9 @@
                             password="validationDefault01"
                             name="password"
                             id="password"
-                            
                             autocomplete="off"
-                            minlength="6" 
+                            minlength="6"
                             required
-
                           />
                         </div>
 
