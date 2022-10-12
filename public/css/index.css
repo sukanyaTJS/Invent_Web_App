@@ -1,9 +1,6 @@
 .navbar{
-    /* position: fixed; */
     background-color: #faec4b;
-    /* overflow: hidden; */
     width: 100%;
-
 }
 .logo{
     width:100px;
@@ -12,7 +9,6 @@
 .ims-heading{
     font-size: 35px;
 }
-
 .caption{
     font-size: 35px;
     color: black;
@@ -23,18 +19,13 @@
 .UnassignedBtn{
     margin-bottom: 10px;
     margin-right: 60px;
-
-    /* padding-top: 10px; */
 }
 .request-button{
-    /* width: 200px; */
     height: 200px;
     background-color: maroon;
     color: white;
-    /* padding: 15px; */
     text-decoration: none;
     border-radius: 2px;
-
 }
 .inputField{
     width: 420px;
@@ -97,13 +88,8 @@
 }
 .anchorBtn{
     text-decoration: none;
-    /* color: grey;
-    width: 150px; */
-}
 
-/* .anchorBtn:hover {
-    color: white;
-  } */
+}
 .history{
     margin: 10px auto;
 }
@@ -111,14 +97,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* background-color: pink; */
 }
 .historyList{
-   
     padding: 15px;
-    /* width: auto; */
     background-color: #ABB0B8;
     border-radius: 5px;
     list-style-type: none;
@@ -129,8 +110,6 @@
 }
 .goBack{
     margin-left: 55px;
-    
-    /* background-color: #faec4b; */
     height: 120px;
     display: flex;
     flex-direction: row;
@@ -143,56 +122,3 @@
     font-size: 30px !important;
  }
  
-
-
-
-
-
-
-
-
-
-
-
-
-/* .heading{
-    color: brown;
-}
-
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width:80%
-}
-.button-container{
-    width:500px;
-    height: 600px;
-    background-color:pink;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    border-radius: 15px;
-}
-
-.asset-button{
-    padding: 20px;
-    margin: 20px;
-    width: 160px;
-    height: 90px;
-    border-width: 0px;
-    border-radius: 15px;
-    background-color: aqua;
-    font-size: 20px;
-}
-.unasset-button{
-    background-color: skyblue;   
-    padding: 20px;
-    margin: 20px;
-    width: 160px;
-    border-width: 0px;
-    border-radius: 15px; 
-    font-size: 18px;
-} */

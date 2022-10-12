@@ -123,9 +123,10 @@ exports.update = async (req, res) => {
 
     return res.redirect("errorPage");
   }
-  console.log(req.body);
+  //console.log(req.body);
   if (req.body.password) {
     if (req.body.password == "wework") {
+
       const asset = await Asset.findById(req.body.id);
       if (asset && asset.status == "waiting") {
         const data = await Asset.findByIdAndUpdate(
@@ -160,7 +161,7 @@ exports.update = async (req, res) => {
         }
       }
     } else {
-      res.render("errorPage");
+      res.send("Password Incorrect");
       // res.status(404).send({
       //   message: `incorrect password`,
       // });
@@ -196,25 +197,3 @@ exports.update = async (req, res) => {
   }
 };
 
-//delete Assets
-exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  Asset.findByIdAndDelete(id)
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({
-          message: `connot delete with id ${id}.may be id is wrong`,
-        });
-      } else {
-        res.send({
-          message: "Asset was deleted successfully!",
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "could not delete Asset with id=" + id,
-      });
-    });
-};

@@ -12,8 +12,3 @@ const connectDB = async () => {
 
 
 module.exports = connectDB
-
-// mongoose
-//   .connect("mongodb://localhost:27017/Inventory_Management")
-//   .then(() => console.log("Database connected!"))
-//   .catch((err) => console.log(err));

@@ -19,10 +19,8 @@ exports.create = async (req, res) => {
   });
 
   //save user in the database
-  user
-
-    .save(user)
-    .then((data) => {
+  user.save()
+  .then((data) => {
       res.send(data);
     })
     .catch((err) => {
@@ -97,31 +95,6 @@ exports.update = (req, res) => {
     .catch((err) => {
       // res.status(500).send({
       //   message: "error update user information",
-      // });
-      res.render("errorPage");
-    });
-};
-
-//delete users
-exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  User.findByIdAndDelete(id)
-    .then((data) => {
-      if (!data) {
-        // res.status(404).send({
-        //   message: `connot delete with id ${id}.may be id is wrong`,
-        // });
-        res.render("errorPage");
-      } else {
-        res.send({
-          message: "user was deleted successfully!",
-        });
-      }
-    })
-    .catch((err) => {
-      // res.status(500).send({
-      //   message: "could not delete user with id=" + id,
       // });
       res.render("errorPage");
     });
