@@ -1,124 +1,79 @@
-.navbar{
-    background-color: #faec4b;
-    width: 100%;
+.navbar {
+  background-color: #faec4b;
+  width: 100%;
 }
-.logo{
-    width:100px;
-    height: 80px;
+.logo {
+  width: 100px;
+  height: 80px;
 }
-.ims-heading{
-    font-size: 35px;
+.ims-heading {
+  font-size: 35px;
 }
-.caption{
-    font-size: 35px;
-    color: black;
+.caption {
+  font-size: 35px;
+  color: black;
 }
-.table{
-    text-align: center;
+.table {
+  text-align: center;
 }
-.UnassignedBtn{
-    margin-bottom: 10px;
-    margin-right: 60px;
+.UnassignedBtn {
+  margin-bottom: 10px;
+  margin-right: 80px;
 }
-.request-button{
-    height: 200px;
-    background-color: maroon;
-    color: white;
-    text-decoration: none;
-    border-radius: 2px;
+.request-button {
+  height: 200px;
+  background-color: maroon;
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
 }
-.inputField{
-    width: 420px;
-    padding: 15px;
+.inputField {
+  width: 420px;
+  padding: 15px;
 }
-.text-gradient{
-    background: linear-gradient(to right, #8e2de2, #4a00e0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+.modelField {
+  padding: 20px;
 }
-
-.descriptionField{
-    padding: 50px;
+.clickbtn {
+  width: 300px;
+  height: 200px;
 }
-.modelField{
-    padding: 20px;
+.requesForm {
+  text-align: center;
 }
-.clickbtn{
-    width: 300px;
-    height: 200px;
+.passwordField {
+  width: 250px;
 }
-.UnassignedButton{
-    width: 350px;
+.inputPassword {
+  font-size: 18;
+  font-weight: 500;
 }
-.alert{
-    font-size: 18;
-    font-weight: bold;
+.assetBtn {
+  width: 150px;
+  border-radius: 5px;
+  padding: 5px;
+  border-color: grey;
+  border-width: 1px;
+  color: grey;
 }
-.requesForm{
-    text-align: center;
+.assetBtn:hover {
+  background-color: #6f7378;
+  color: white;
 }
-.passwordField{
-    width: 250px;
+.sideHeading {
+  color: black;
+  font-weight: bold;
 }
-.inputPassword{
-    font-size: 18;
-    font-weight: 500;
+.goBack {
+  margin-left: 55px;
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
 }
-.historyList{
-    width: 400px;
-    border-width: 5px;
-    border-color: #8e2de2;
-    background-color: pink;
-    margin: 5px;
+.body {
+  background: #dedede;
 }
-.assetBtn{
-    width: 150px;
-    border-radius: 5px;
-    padding: 5px;
-    border-color: grey;
-    border-width: 1px;
-    color: grey;
-
+.page-wrap {
+  min-height: 100vh;
 }
-.assetBtn:hover{ 
-    background-color: #6F7378;
-    color: white;
-       
-}
-.anchorBtn{
-    text-decoration: none;
-
-}
-.history{
-    margin: 10px auto;
-}
-.historyContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.historyList{
-    padding: 15px;
-    background-color: #ABB0B8;
-    border-radius: 5px;
-    list-style-type: none;
-}
-.sideHeading{
-    color: black;
-    font-weight: bold;
-}
-.goBack{
-    margin-left: 55px;
-    height: 120px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-}
-.aboutBtn{
-    font-size: 30;
-}
-.tooltip{
-    font-size: 30px !important;
- }
- 

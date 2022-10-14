@@ -15,16 +15,14 @@ var schema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "UnAssigned",
+    default: "Unassigned",
   },
   createdAt: {
     type: Date,
-    // default: new Date()
     default: Date.now,
   },
   updatedAt: {
     type: Date,
-    // default: new Date()
     default: Date.now,
   },
   history: {
@@ -39,7 +37,6 @@ var schema = new mongoose.Schema({
     },
     updatedAt: {
       type: Date,
-      // default: new Date()
       default: Date.now,
     },
   },

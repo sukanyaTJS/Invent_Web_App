@@ -3,7 +3,8 @@ const app = express();
 const connectDB  = require('./database/connection')
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-
+const dotenv = require("dotenv")
+dotenv.config()
 connectDB();
 
 app.set("view engine", "ejs");
@@ -22,7 +23,7 @@ app.use('/', require('./routes/router'))
 
 
 
-app.listen(8000, () => console.log("server running..."));
+app.listen(process.env.PORT, () => console.log("server running..."));
 
 
 

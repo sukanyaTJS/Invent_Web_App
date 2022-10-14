@@ -3,12 +3,11 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     const con = await mongoose
-      .connect("mongodb://localhost:27017/Inventory_Management")
+      .connect(process.env.DB_URL)
       .then(() => console.log("Database connected!"));
   } catch (err) {
     console.log(err);
   }
 };
 
-
-module.exports = connectDB
+module.exports = connectDB;

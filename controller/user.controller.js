@@ -4,8 +4,7 @@ const User = require("../model/user_model");
 exports.create = async (req, res) => {
   //validate request
   if (!req.body) {
-    // res.status(400).send({ message: "content can not be empty!" });
-    res.render("errorPage");
+    res.render("error404");
   }
 
   //new user
@@ -15,87 +14,62 @@ exports.create = async (req, res) => {
     id: allUsers.length + 1,
     name: req.body.name,
     asset: req.body.asset,
-    // createdAt: req.body.createdAt
   });
 
   //save user in the database
-  user.save()
-  .then((data) => {
+  await user
+    .save()
+    .then((data) => {
       res.send(data);
     })
     .catch((err) => {
-      // res.status(500).send({
-      //   message: "error occured while creating user details",
-      // });
-      res.render("errorPage");
-
+      res.render("error404");
     });
 };
 
 //Get users
-exports.find = (req, res) => {
+exports.find = async (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
 
-    User.findById(id)
+    await User.findById(id)
       .then((data) => {
         if (!data) {
-          // res.status(404).send({
-          //   message: "not found user with id" + id,
-          // });
-          res.render("errorPage");
+          res.render("error404");
         } else {
-          // res.send(data);
           res.render("index", { users: data });
         }
       })
       .catch((err) => {
-        // res.status(500).send({
-        //   message: "error retriving user with id" + id,
-        // });
-        res.render("errorPage");
+        res.render("error404");
       });
   } else {
-    User.find()
+    await User.find()
       .then((user) => {
-        //res.send(user);
         res.render("index", { users: user });
       })
       .catch((err) => {
-        // res.status(500).send({
-        //   message: "erroe occur while retriving user info",
-        // });
-        res.render("errorPage");
-
+        res.render("error404");
       });
   }
 };
 
 // update users
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   if (!req.body) {
-    // return res.status(400).send({
-    //   message: "Data to update can not be empty",
-    // });
-    res.render("errorPage");
+    res.render("error404");
   }
 
   const id = req.params.id;
-  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  await User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
-        // res.status(404).send({
-        //   message: `cannot update user with ${id}. May be user not found`,
-        // });
-        res.render("errorPage");
+        res.render("error404");
       } else {
         res.send(data);
       }
     })
     .catch((err) => {
-      // res.status(500).send({
-      //   message: "error update user information",
-      // });
-      res.render("errorPage");
+      res.render("error404");
     });
 };

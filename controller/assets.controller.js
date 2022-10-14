@@ -2,82 +2,61 @@ const Asset = require("../model/assets_model");
 const User = require("../model/user_model");
 
 //create Assets or Post
-
 exports.create = async (req, res) => {
   //validate request
   if (!req.body) {
-    res.render("errorPage");
-    // res.status(400).send({ message: "content can not be empty!" });
+    res.render("error404");
   }
 
   //new Asset
   const newAsset = await Asset.create({
     name: req.body.name,
-    // description: req.body.description,
-    // createdAt: req.body.createdAt
+    description: req.body.description,
   });
 
   if (newAsset) {
-    //res.send(newAsset);
     res.redirect("/api/assets");
   } else {
-    res.render("errorPage");
-    // res.status(500).send({
-    //   message: "error occured while creating Asset details",
-    // });
+    res.render("error404");
   }
 };
 
 // Get Assets
-exports.find = (req, res) => {
+exports.find = async (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
-
-    Asset.findOne({
+    await Asset.findOne({
       _id: id,
-      $or: [{ status: "UnAssigned" }, { status: "waiting" }],
+      $or: [{ status: "Unassigned" }, { status: "waiting" }],
     })
       .then((data) => {
         if (!data) {
-          res.render("errorPage");
-          // res.status(404).send({
-          //   message: "not found Asset with id" + id,
-          // });
+          res.render("error404");
         } else {
-          //   res.send(data);
           res.render("assets", { assets: data });
         }
       })
       .catch((err) => {
-        res.render("errorPage");
-        // res.status(500).send({
-        //   message: "error retriving Asset with id" + id,
-        // });
+        res.render("error404");
       });
   } else {
-    Asset.find({
-      $or: [{ status: "UnAssigned" }, { status: "waiting" }],
+    await Asset.find({
+      $or: [{ status: "Unassigned" }, { status: "waiting" }],
     })
       .then((asset) => {
-        console.log(asset);
-        // res.send(asset);
         res.render("assets", { assets: asset });
       })
       .catch((err) => {
-        res.render("errorPage");
-        // res.status(500).send({
-        //   message: "erroe occur while retriving Asset info",
-        // });
+        res.render("error404");
       });
   }
 };
 
 // get assigned users
-exports.getUsers = (req, res) => {
+exports.getUsers = async (req, res) => {
   const response = [];
-  Asset.find({ status: "assigned" })
+  await Asset.find({ status: "assigned" })
     .then(async (asset) => {
-      // throw "Error";
       for (let i = 0; i < asset.length; i++) {
         const user = await User.findOne({ id: asset[i].userId });
         if (user) {
@@ -90,81 +69,58 @@ exports.getUsers = (req, res) => {
           });
         }
       }
-      // res.send(response);
+
       res.render("index", { users: response });
     })
     .catch((err) => {
-      res.render("errorPage");
-      // res.status(500).send({
-      //   message: "error occur while retriving Asset info",
-      // });
+      res.render("error404");
     });
 };
 
 exports.usersHistory = async (req, res) => {
   const asset = await Asset.findById({ _id: req.params.assetId });
   if (asset) {
-    // res.send(asset.history);
     res.render("history", { users: asset.history });
   } else {
-    res.render("errorPage");
-    // res.status(500).send({
-    //   message: "error occur while retriving Asset info",
-    // });
+    res.render("error404");
   }
 };
 
 //update Assets
 exports.update = async (req, res) => {
   if (!req.body) {
-    // return res.status(400).send({
-    //   message: "Data to update can not be empty",
-    // });
-
-    return res.redirect("errorPage");
+    return res.redirect("error404");
   }
-  //console.log(req.body);
-  if (req.body.password) {
-    if (req.body.password == "wework") {
 
+  if (req.body.password) {
+    if (req.body.password === process.env.PASSWORD) {
       const asset = await Asset.findById(req.body.id);
-      if (asset && asset.status == "waiting") {
+      if (asset && asset.status === "waiting") {
         const data = await Asset.findByIdAndUpdate(
           { _id: req.body.id },
           { status: "assigned" },
-          // { description: req.body.description },
+
           { new: true }
         );
         if (data) {
-          // res.send(data);
           res.redirect("/api/assets");
         } else {
-          res.render("errorPage");
-          // res.status(404).send({
-          //   message: `cannot update Asset with ${req.body.id}. May be Asset not found`,
-          // });
+          res.render("error404");
         }
       } else {
         const data = await Asset.findByIdAndUpdate(
           { _id: req.body.id },
-          { status: "UnAssigned", userId: "" },
+          { status: "Unassigned", userId: "" },
           { new: true }
         );
         if (data) {
-          // res.send(data);
           res.redirect("/");
         } else {
-          res.render("errorPage");
-          // res.status(404).send({
-          //   message: `cannot update Asset with ${req.body.id}. May be Asset not found`,
-          // });
+          res.render("error404");
         }
       }
     } else {
-      res.send("Password Incorrect");
-      // res.status(404).send({
-      //   message: `incorrect password`,
-      // });
+      res.render("error404");
     }
   } else {
     let history = "";
@@ -186,14 +142,9 @@ exports.update = async (req, res) => {
       { new: true }
     );
     if (data) {
-      // res.send(data);
       res.redirect("/api/assets");
     } else {
-      res.render("errorPage");
-      // res.status(404).send({
-      //   message: `cannot update Asset with ${req.body.id}. May be Asset not found`,
-      // });
+      res.render("error404");
     }
   }
 };
-
