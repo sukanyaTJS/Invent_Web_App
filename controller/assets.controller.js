@@ -8,7 +8,6 @@ exports.create = async (req, res) => {
     if (!req.body) {
       res.render("error404");
     }
-
     //new Asset
     const newAsset = await Asset.create({
       name: req.body.name,
