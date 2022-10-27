@@ -9,23 +9,18 @@ exports.create = async (req, res) => {
     }
 
     //new user
-    const allUsers = await User.find();
-
-    const user = new User({
-      id: allUsers.length + 1,
+    const user = await User.create({
+      id: req.body.id,
       name: req.body.name,
-      asset: req.body.asset,
+      // asset: req.body.asset,
     });
-
-    //save user in the database
-    const data = await user.save();
-    if (data) {
-      res.send(data);
+    if (user) {
+      res.send(user);
     } else {
-      res.render("error404");
+      res.send("failed to create")
     }
   } catch (error) {
-    res.render("error404");
+    res.send("failed try again")
   }
 };
 

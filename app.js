@@ -20,7 +20,7 @@ app.use('/', require('./routes/router'))
 //calling database
 connectDB();
 
-app.listen(process.env.PORT, () => console.log("server running..."));
+app.listen(process.env.PORT, () => console.log(`server running on ${process.env.PORT}`));
 
 
 
