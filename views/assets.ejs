@@ -27,7 +27,7 @@
   </div>
   <!-- Modal -->
   <form
-    action="/api/assets"
+    action="/assets"
     method="POST"
     id="create_asset"
     class="d-flex flex-direction-row justify-content-center"
@@ -113,7 +113,7 @@
           <td><%= i + 1 %></td>
 
           <td>
-            <a class="anchorBtn" href="/api/usersHistory/<%= assets[i]._id %>">
+            <a class="anchorBtn" href="/usersHistory/<%= assets[i]._id %>">
               <button type="submit" class="assetBtn">
                 <%= assets[i].name %>
               </button>

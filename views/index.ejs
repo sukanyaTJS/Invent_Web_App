@@ -12,7 +12,7 @@
     >
       <div class="d-flex flex-direction-row justify-content-end UnassignedBtn">
         <a
-          href="/api/assets"
+          href="/assets"
           class="btn btn-outline-secondary negative-margin-end"
           >Unassigned <i class="fa-solid fa-angles-right"></i
         ></a>
@@ -39,7 +39,7 @@
           <td><%= user.userName %></td>
 
           <td>
-            <a class="anchorBtn" href="/api/usersHistory/<%= user._id %>">
+            <a class="anchorBtn" href="/usersHistory/<%= user._id %>">
               <button type="submit" class="assetBtn"><%= user.asset %></button>
             </a>
           </td>
@@ -68,7 +68,7 @@
           </td>
 
           <!--Request Modal -->
-          <form action="/api/updateAssets" method="POST">
+          <form action="/updateAssets" method="POST">
             <div
               class="modal fade"
               id="pending<%= i + 1 %>"

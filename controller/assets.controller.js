@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
     });
 
     if (newAsset) {
-      res.redirect("/api/assets");
+      res.redirect("/assets");
     } else {
       res.render("error404");
     }
@@ -110,7 +110,7 @@ exports.update = async (req, res) => {
             { new: true }
           );
           if (data) {
-            res.redirect("/api/assets");
+            res.redirect("/assets");
           } else {
             res.render("error404");
           }
@@ -147,7 +147,7 @@ exports.update = async (req, res) => {
         { new: true }
       );
       if (data) {
-        res.redirect("/api/assets");
+        res.redirect("/assets");
       } else {
         res.render("error404");
       }
