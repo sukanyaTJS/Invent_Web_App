@@ -1,6 +1,7 @@
 const Asset = require("../model/assets_model");
 const User = require("../model/user_model");
 
+
 //create Assets or Post
 exports.create = async (req, res) => {
   try {
