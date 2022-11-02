@@ -43,10 +43,12 @@
 }
 .passwordField {
   width: 250px;
+  margin-left: 30px;
 }
 .inputPassword {
   font-size: 18;
   font-weight: 500;
+  margin-left: 30px;
 }
 .assetBtn {
   width: 150px;
@@ -76,4 +78,21 @@
 }
 .page-wrap {
   min-height: 100vh;
+}
+.info-btn {
+  color: red;
+}
+.info-icon {
+  width: 20px;
+  height: 20px;
+}
+.employeeDataContainer {
+  background-color: #efefef;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px 20px 10px 20px;
+  border-radius: 10px;
+  line-height: 0.2px;
 }

@@ -1,7 +1,6 @@
 const Asset = require("../model/assets_model");
 const User = require("../model/user_model");
 
-
 //create Assets or Post
 exports.create = async (req, res) => {
   try {
@@ -33,6 +32,7 @@ exports.find = async (req, res) => {
       const data = await Asset.findOne({
         _id: id,
         $or: [{ status: "Unassigned" }, { status: "waiting" }],
+        isActive: true,
       });
       if (!data) {
         res.render("error404");
@@ -42,9 +42,16 @@ exports.find = async (req, res) => {
     } else {
       const asset = await Asset.find({
         $or: [{ status: "Unassigned" }, { status: "waiting" }],
+        isActive: true,
       });
       if (asset) {
-        res.render("assets", { assets: asset });
+        const user = await User.find();
+        if (user) {
+          asset.push(user);
+          res.render("assets", { assets: asset });
+        } else {
+          res.render("assets", { assets: asset });
+        }
       } else {
         res.render("error404");
       }
@@ -58,7 +65,7 @@ exports.find = async (req, res) => {
 exports.getUsers = async (req, res) => {
   try {
     const response = [];
-    const asset = await Asset.find({ status: "assigned" });
+    const asset = await Asset.find({ status: "assigned", isActive: true });
     if (asset.length != 0) {
       for (let i = 0; i < asset.length; i++) {
         const user = await User.findOne({ id: asset[i].userId });
@@ -130,7 +137,7 @@ exports.update = async (req, res) => {
       }
     } else {
       let history = "";
-      const user = await User.findOne({ id: req.body.userId });
+      const user = await User.findOne({ id: req.body.userId, isActive: true });
       if (user) {
         history = {
           id: user.id,
@@ -148,6 +155,27 @@ exports.update = async (req, res) => {
         { new: true }
       );
       if (data) {
+        res.redirect("/assets");
+      } else {
+        res.render("error404");
+      }
+    }
+  } catch (error) {
+    res.render("error404");
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    if (!req.body.password || req.body.password !== process.env.PASSWORD) {
+      res.render("error404");
+    } else {
+      const asset = await Asset.findByIdAndUpdate(
+        { _id: req.body.id },
+        { isActive: false },
+        { new: true }
+      );
+      if (asset) {
         res.redirect("/assets");
       } else {
         res.render("error404");
