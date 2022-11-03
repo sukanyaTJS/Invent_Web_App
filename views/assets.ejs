@@ -181,14 +181,14 @@
                     <form class="row">
                             <div class="accordion" id="myAccordion">
                               <div class="panel">
-                                  <button type="button" class="btn" data-toggle="collapse" data-target="#collapsible-1" data-parent="#myAccordion">
+                                  <button type="button" class="btn" data-toggle="collapse" data-target="#collapsible-1<%=assets[i]._id%>" data-parent="#myAccordion">
                                     <i class="fa fa-info-circle info-icon" aria-hidden="false"></i><span class="info-btn">Click the Icon for ID's</span> 
                                   </button>
                                   
-                                  <div id="collapsible-1" class="collapse employeeDataContainer">
+                                  <div id="collapsible-1<%=assets[i]._id%>" class="collapse employeeDataContainer">
                                     <div>
                                       <% for (var user = 0; user < (assets[assets.length-1]).length; user++) { %>
-                                        <ul type="none" class="">
+                                        <ul type="none">
                                           <li class="p-2"> <%= assets[assets.length-1][user].name  %> : <%= assets[assets.length-1][user].id  %></li>
                                         </ul>
                                         <% } %>            
@@ -217,14 +217,13 @@
                           class="form-control passwordField"
                           userId="validationDefault01"
                           name="userId"
-                          id="id"
                           autocomplete="off"
                           required
                         />
                       </div>
 
                       <div
-                        class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-4"
+                        class="pt-5 pb-4"
                       >
                         <button
                           type="button"
@@ -271,7 +270,7 @@
 
                       <div class="col-md-8 mb-3 m-3 m-auto">
                         <label
-                          for="validationDefault01"
+                          for="validationDefault02"
                           class="form-label inputPassword"
                           >Enter password</label
                         >
@@ -279,9 +278,8 @@
                           type="password"
                           placeholder="Password"
                           class="form-control passwordField"
-                          password="validationDefault01"
+                          password="validationDefault02"
                           name="password"
-                          id="password"
                           autocomplete="off"
                           minlength="6"
                           required

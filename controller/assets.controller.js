@@ -137,7 +137,7 @@ exports.update = async (req, res) => {
       }
     } else {
       let history = "";
-      const user = await User.findOne({ id: req.body.userId, isActive: true });
+      const user = await User.findOne({ id: req.body.userId });
       if (user) {
         history = {
           id: user.id,
