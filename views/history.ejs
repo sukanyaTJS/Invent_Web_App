@@ -1,20 +1,16 @@
 <!-- include header -->
 <%- include('include/header') %>
 <!-- /include header -->
-
-<!-- Main Site -->
-    <main>
-      <div>
-        <table class="table container-sm table-striped caption-top">
-          <div class="goBack">
-            <a onclick="history.back()" class="btn btn-outline-secondary"
-              ><i class="fa-solid fa-angles-left"></i>Go Back</a
-            >
-            <caption class="caption text-center">
-              History
-            </caption>
-          </div>
-
+  <body>
+    <div class="h-screen bg-gray-100 padding">
+      <h1 class="text-center mt-2">History</h1>
+      <div class="d-flex flex-direction-row justify-content-start mb-2 p-1">
+        <a onclick="history.back()" class="btn btn-outline-secondary"
+          ><i class="fa-solid fa-angles-left"></i>Go Back</a
+        >
+      </div>
+      <div class="overflow-auto rounded-lg shadow p-1 d-none d-lg-block">
+        <table class="table table-striped caption-top text-center">
           <thead class="table-dark">
             <tr>
               <th scope="col">S.NO.</th>
@@ -25,7 +21,7 @@
           </thead>
           <tbody>
             <% users.forEach(function (user,i) { %>
-            <td><%= i + 1 %></td>
+            <td id="numbering"><%= i + 1 %></td>
             <td><%= user.id %></td>
             <td><%= user.name %></td>
             <td><%= user.createdAt %></td>
@@ -33,11 +29,35 @@
           <% }) %>
         </table>
       </div>
-    </main>
-    <!-- /Main Site -->
 
-    <!-- include footer -->
-    <%- include('include/footer') %>
-    <!-- /include footer -->
+      <!-- responsive to the mobile and tab -->
+      <div class="d-block d-lg-none">
+        <div class="m-2">
+          <table>
+            <% users.forEach(function (user,i) { %>
+            <tr>
+              <th>S.NO.</th>
+              <th class="information"><%= i + 1 %></th>
+            </tr>
+            <tr>
+              <td>Employee Id</td>
+              <td class="information"><%= user.id %></td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td class="information"><%= user.name %></td>
+            </tr>
+            <tr>
+              <td>Time</td>
+              <td class="information"><%= user.createdAt %></td>
+            </tr>
+            <% }) %>
+          </table>
+        </div>
+      </div>
+    </div>
   </body>
+  <script>
+    
+  </script>
 </html>

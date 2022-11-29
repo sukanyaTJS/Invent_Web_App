@@ -1,6 +1,7 @@
 const Asset = require("../model/assets_model");
 const User = require("../model/user_model");
 
+
 //create Assets or Post
 exports.create = async (req, res) => {
   try {
@@ -37,7 +38,7 @@ exports.find = async (req, res) => {
       if (!data) {
         res.render("error404");
       } else {
-        res.render("assets", { assets: data });
+        res.render("assets", { assets: data, err: undefined });
       }
     } else {
       const asset = await Asset.find({
@@ -48,9 +49,9 @@ exports.find = async (req, res) => {
         const user = await User.find();
         if (user) {
           asset.push(user);
-          res.render("assets", { assets: asset });
+          res.render("assets", { assets: asset, err: undefined });
         } else {
-          res.render("assets", { assets: asset });
+          res.render("assets", { assets: asset, err: undefined });
         }
       } else {
         res.render("error404");
@@ -79,14 +80,12 @@ exports.getUsers = async (req, res) => {
           });
         }
       }
-      res.render("index", { users: response });
-    } else if (asset.length == 0) {
-      res.render("index", { users: response });
+      res.render("index", { users: response, err: undefined });
     } else {
       res.render("error404");
     }
   } catch (error) {
-    res.render("error404");
+    res.render("error500");
   }
 };
 
@@ -107,8 +106,69 @@ exports.usersHistory = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     if (req.body.password) {
-      if (!req.body.password || req.body.password !== process.env.PASSWORD) {
-        res.render("error404");
+      if (req.body.password !== process.env.PASSWORD) {
+        if (
+          req.body.unAssignModal === "unAssign" ||
+          req.body.unAssignModalMbl === "unAssignMbl"
+        ) {
+          const response = [];
+          const asset = await Asset.find({
+            status: "assigned",
+            isActive: true,
+          });
+          if (asset.length != 0) {
+            for (let i = 0; i < asset.length; i++) {
+              const user = await User.findOne({ id: asset[i].userId });
+              if (user) {
+                response.push({
+                  _id: asset[i]._id,
+                  userName: user.name,
+                  description: asset[i].description,
+                  asset: asset[i].name,
+                  updatedAt: asset[i].updatedAt.toLocaleString(),
+                });
+              }
+            }
+          }
+          res.render("index", {
+            users: response,
+            err: {
+              id: req.body.id,
+              message: "Password doesn't match",
+              unAssignTheId: "unAssignTheId",
+              unAssignTheIdInMbl: "unAssignTheIdInMbl",
+            },
+          });
+        }
+        const asset = await Asset.find({
+          $or: [{ status: "Unassigned" }, { status: "waiting" }],
+          isActive: true,
+        });
+        if (asset) {
+          const user = await User.find();
+          if (user) {
+            asset.push(user);
+            res.render("assets", {
+              assets: asset,
+              err: {
+                id: req.body.id,
+                message: "Password doesn't match",
+                assignToTheId: "assignToTheId",
+                assignToTheIdInMbl: "assignToTheIdInMbl",
+              },
+            });
+          } else {
+            res.render("assets", {
+              assets: asset,
+              err: {
+                id: req.body.id,
+                message: "Password doesn't match",
+                assignToTheId: "assignToTheId",
+                assignToTheIdInMbl: "assignToTheIdInMbl",
+              },
+            });
+          }
+        }
       } else {
         const asset = await Asset.findById(req.body.id);
         if (asset && asset.status === "waiting") {
@@ -168,7 +228,65 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     if (!req.body.password || req.body.password !== process.env.PASSWORD) {
-      res.render("error404");
+      if (
+        req.body.page === "index" ||
+        req.body.deleteModalMbl === "deleteInMbl"
+      ) {
+        const response = [];
+        const asset = await Asset.find({ status: "assigned", isActive: true });
+        if (asset.length != 0) {
+          for (let i = 0; i < asset.length; i++) {
+            const user = await User.findOne({ id: asset[i].userId });
+            if (user) {
+              response.push({
+                _id: asset[i]._id,
+                userName: user.name,
+                description: asset[i].description,
+                asset: asset[i].name,
+                updatedAt: asset[i].updatedAt.toLocaleString(),
+              });
+            }
+          }
+        }
+        res.render("index", {
+          users: response,
+          err: {
+            id: req.body.id,
+            message: "Password doesn't match",
+            deleteAsset: "deleteAsset",
+            deleteAssetInMbl: "deleteAssetInMbl",
+          },
+        });
+      }
+      const asset = await Asset.find({
+        $or: [{ status: "Unassigned" }, { status: "waiting" }],
+        isActive: true,
+      });
+      if (asset) {
+        const user = await User.find();
+        if (user) {
+          asset.push(user);
+          res.render("assets", {
+            assets: asset,
+            err: {
+              id: req.body.id,
+              message: "Password doesn't match",
+              deleteUnassignedAsset: "deleteUnassignedAsset",
+              deleteUnassignedAssetInMbl: "deleteUnassignedAssetInMbl",
+            },
+          });
+        } else {
+          res.render("assets", {
+            assets: asset,
+            err: {
+              id: req.body.id,
+              message: "Password doesn't match",
+              deleteUnassignedAsset: "deleteUnassignedAsset",
+              deleteUnassignedAssetInMbl: "deleteUnassignedAssetInMbl",
+            },
+          });
+        }
+      }
     } else {
       const asset = await Asset.findByIdAndUpdate(
         { _id: req.body.id },
@@ -176,6 +294,9 @@ exports.delete = async (req, res) => {
         { new: true }
       );
       if (asset) {
+        if (req.body.page === "index") {
+          res.redirect("/");
+        }
         res.redirect("/assets");
       } else {
         res.render("error404");

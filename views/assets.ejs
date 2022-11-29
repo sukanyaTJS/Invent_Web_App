@@ -2,315 +2,642 @@
 <%- include('include/header') %>
 <!-- /include header -->
 
-<!-- Main Site -->
-<main>
-  <div
-    class="d-flex flex-direction-row justify-content-around align-items-center pt-4"
-  >
-    <div class="">
-      <a href="/" class="btn btn-outline-secondary"
-        ><i class="fa-solid fa-angles-left"></i>Go Home</a
-      >
-    </div>
-
-    <!-- Button trigger modal -->
-    <div class="">
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
-        Create Asset <i class="fa-solid fa-angles-right"></i>
-      </button>
-    </div>
-  </div>
-  <!-- Modal -->
-  <form
-    action="/assets"
-    method="POST"
-    id="create_asset"
-    class="d-flex flex-direction-row justify-content-center"
-  >
     <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
+      class="d-flex flex-direction-row justify-content-around align-items-center pt-4"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Asset Details</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
+      <div class="">
+        <a href="/" class="btn btn-outline-secondary"
+          ><i class="fa-solid fa-angles-left"></i>Go Home</a
+        >
+      </div>
 
-          <div class="modelField">
-            <div class="modal-body">
-              <label class="form-label" for="textAreaExample"
-                >Enter Asset Name</label
-              ><br />
-              <input name="name" class="inputField" type="text" autocomplete="off" required />
+      <!-- Button trigger modal -->
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Create Asset <i class="fa-solid fa-angles-right"></i>
+        </button>
+      </div>
+    </div>
+    <!--Create Asset Modal -->
+    <form
+      action="/assets"
+      method="POST"
+      id="create_asset"
+      class="d-flex flex-direction-row justify-content-center"
+    >
+      <div
+        class="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Asset Details
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
-            <div class="form-outline modal-body">
-              <label class="form-label" for="textAreaExample"
-                >Description</label
+
+            <div class="modelField">
+              <div class="modal-body">
+                <label class="form-label" for="textAreaExample"
+                  >Enter Asset Name</label
+                ><br />
+                <input
+                  name="name"
+                  class="inputField"
+                  type="text"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+              <div class="form-outline modal-body">
+                <label class="form-label" for="textAreaExample"
+                  >Description</label
+                >
+                <textarea
+                  name="description"
+                  type="text"
+                  class="form-control"
+                  id="textAreaExample"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
               >
-              <textarea
-                name="description"
-                type="text"
-                class="form-control"
-                id="textAreaExample"
-                rows="4"
-                required
-              ></textarea>
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
             </div>
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>
+    </form>
+    <!-- Unassigned Assets Table -->
+    <div class="d-flex flex-direction-row justify-content-center mt-3">
+      <h1 class="unassign-H1">Unassigned Assets</h1>
     </div>
-  </form>
+    <div class="overflow-auto rounded-lg shadow padding d-none d-lg-block">
+      <table class="table table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">S.NO.</th>
+            <th scope="col">Asset</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < assets.length-1; i++) { %>
+          <tr>
+            <td id="numbering"><%= i+1 %></td>
 
-  <!-- </form> -->
-
-  <div
-    class="d-flex flex-direction-row justify-content-center align-items-center pt-4 pb-4 m-4"
-  >
-    <table class="table caption-top table-striped">
-      <caption class="caption text-center">
-        
-        Unassigned Assets
-      </caption>
-      <thead class="table-dark text-center">
-        <tr>
-          <th scope="col">S.NO.</th>
-          <th scope="col">Assets</th>
-          <th scope="col">Description</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody class="text-center">
-        <% for (var i = 0; i < assets.length-1; i++) { %>
-        <tr>
-          <td><%= i + 1 %></td>
-
-          <td>
-            <a class="anchorBtn" href="/usersHistory/<%= assets[i]._id %>">
-              <button type="submit" class="assetBtn">
-                <%= assets[i].name %>
+            <td>
+              <a class="anchorBtn" href="/usersHistory/<%= assets[i]._id %>">
+                <button type="submit" class="assetBtn">
+                  <%= assets[i].name %>
+                </button>
+              </a>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-secondary aboutBtn"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="<%= assets[i].description %>"
+              >
+                About
               </button>
-            </a>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-secondary aboutBtn"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="<%= assets[i].description %>"
-            >
-              About
-            </button>
-          </td>
+            </td>
 
-          <td>
-            <% if(assets[i].status === 'waiting'){ %>
-            <button
-              class="btn btn-outline-secondary"
-              data-bs-toggle="modal"
-              data-bs-target="#pending<%= i + 1 %>"
-              id="requestBtn"
-            >
-              Pending
-            </button>
-            <% } else{ %>
-            <button
-            class="btn btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop2<%= i + 1 %>"
-            id="requestBtn"
-            >
-              Request
-            </button>
+            <td>
+              <% if(assets[i].status === 'waiting'){ %>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#pending<%= assets[i]._id %>"
+                id="pendingBtn<%= assets[i]._id %>"
+              >
+                Pending
+              </button>
+              <% } else{ %>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#request<%= assets[i]._id %>"
+                id="requestBtn<%= assets[i]._id %>"
+              >
+                Request
+              </button>
 
-            <% } %>
-            <button type="button" 
-            data-bs-toggle="modal"
-            class="btn btn-link"
-            data-bs-target="#delete<%= i + 1 %>"
-            id="requestBtn">
-            <i class="fa-solid fa-trash"></i>
-            </button>
-          </td>
+              <% } %>
+              <button
+                type="button"
+                data-bs-toggle="modal"
+                class="btn btn-link"
+                data-bs-target="#delete0<%= assets[i]._id %>"
+                id="deleteBtn0<%= assets[i]._id %>"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
 
-          <!--Request Modal -->
-          <form action="/updateAssets" method="POST">
-            <div
-              class="modal fade requesForm "
-              id="staticBackdrop2<%= i + 1 %>"
-              data-bs-backdrop="static"
-              data-bs-keyboard="false"
-              tabindex="-1"
-              aria-labelledby="staticBackdropLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div
-                  class="modal-content d-flex flex-direction-row justify-content-center"
-                >
-                  <div class="modal-body pt-5">
-                    <form class="row">
-                            <div class="accordion" id="myAccordion">
-                              <div class="panel">
-                                  <button type="button" class="btn" data-toggle="collapse" data-target="#collapsible-1<%=assets[i]._id%>" data-parent="#myAccordion">
-                                    <i class="fa fa-info-circle info-icon" aria-hidden="false"></i><span class="info-btn">Click the Icon for ID's</span> 
-                                  </button>
-                                  
-                                  <div id="collapsible-1<%=assets[i]._id%>" class="collapse employeeDataContainer">
-                                    <div>
-                                      <% for (var user = 0; user < (assets[assets.length-1]).length; user++) { %>
-                                        <ul type="none">
-                                          <li class="p-2"> <%= assets[assets.length-1][user].name  %> : <%= assets[assets.length-1][user].id  %></li>
-                                        </ul>
-                                        <% } %>            
-                                  </div>              
-                                  </div> 
-                                </div>
-                            </div>                   
-                      <div class="form-group">
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="<%=assets[i]._id%>"
-                        />
-                      </div>
+              <!--Pending Modal -->
+              <div
+                class="modal fade"
+                id="pending<%= assets[i]._id %>"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="pending"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div
+                    class="modal-content"
+                  >
+                    <div class="modal-body pt-5">
+                      <form class="row" action="/updateAssets" method="POST">
+                        <div class="form-group">
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="<%=assets[i]._id%>"
+                          />
+                        </div>
 
-                      <div class="col-md-8 mb-3 m-3 m-auto">
+                        <div class="col-md-8 mb-3 m-auto">
+                          <label
+                            for="pendingPasswordInput"
+                            class="form-label d-flex flex-direction-row justify-content-start"
+                            >Enter password</label
+                          >
+                          <input
+                            type="password"
+                            placeholder="Password"
+                            class="form-control passwordField"
+                            name="password"
+                            autocomplete="off"
+                            minlength="6"
+                            id="pendingPasswordInput<%=assets[i]._id%>"
+                            required
+                          />
+                          <% if (err && err.assignToTheId && err.id ===
+                          String(assets[i]._id)) { %>
+                          <div class="pendingPasswordError mt-2">
+                            <p class="d-flex flex-direction-row justify-content-start text-danger">
+                              <%= err.message %>
+                            </p>
+                            <% } %>
+                          </div>
+                        </div>
 
-                        <label
-                          for="validationDefault01"
-                          class="form-label inputPassword"
-                          >Enter Employee ID</label
+                        <div
+                          class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-4"
                         >
-                        <input
-                          type="number"
-                          class="passwordField"
-                          class="form-control passwordField"
-                          userId="validationDefault01"
-                          name="userId"
-                          autocomplete="off"
-                          required
-                        />
-                      </div>
-
-                      <div
-                        class="pt-5 pb-4"
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-secondary m-2"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="submit" class="btn btn-primary m-2">
-                          Save
-                        </button>
-                      </div>
-                    </form>
+                          <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            data-bs-dismiss="modal"
+                            id="pendingCloseBtn<%=assets[i]._id%>"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary m-2">
+                            Save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+              <!--Request Modal -->
+              <div
+                class="modal fade requesForm"
+                id="request<%= assets[i]._id %>"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div
+                    class="modal-content"
+                  >
+                    <div class="modal-body pt-5">
+                      <form class="row" action="/updateAssets" method="POST">
+                        <div class="accordion" id="myAccordion">
+                          <div class="panel">
+                            <button
+                              type="button"
+                              class="btn"
+                              data-toggle="collapse"
+                              data-target="#collapsible-1<%=assets[i]._id%>"
+                              data-parent="#myAccordion"
+                            >
+                              <i
+                                class="fa fa-info-circle info-icon"
+                                aria-hidden="false"
+                              ></i
+                              ><span class="info-btn"
+                                >Click the Icon for ID's</span
+                              >
+                            </button>
 
-          <!--Pending Modal -->
-          <form action="/updateAssets" method="POST">
-            <div
-              class="modal fade"
-              id="pending<%= i + 1 %>"
-              data-bs-backdrop="static"
-              data-bs-keyboard="false"
-              tabindex="-1"
-              aria-labelledby="pending"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div
-                  class="modal-content d-flex flex-direction-row justify-content-center"
-                >
-                  <div class="modal-body pt-5">
-                    <form class="row">
-                      <div class="form-group">
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="<%=assets[i]._id%>"
-                        />
-                      </div>
-
-                      <div class="col-md-8 mb-3 m-3 m-auto">
-                        <label
-                          for="validationDefault02"
-                          class="form-label inputPassword"
-                          >Enter password</label
-                        >
-                        <input
-                          type="password"
-                          placeholder="Password"
-                          class="form-control passwordField"
-                          password="validationDefault02"
-                          name="password"
-                          autocomplete="off"
-                          minlength="6"
-                          required
-                        />
-                      </div>
-
-                      <div
-                        class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-4"
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-secondary m-2"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="submit" class="btn btn-primary m-2">
-                          Save
-                        </button>
-                      </div>
-                    </form>
+                            <div
+                              id="collapsible-1<%=assets[i]._id%>"
+                              class="collapse employeeDataContainer"
+                            >
+                              <div>
+                                <% for (var user = 0; user <
+                                (assets[assets.length-1]).length; user++) { %>
+                                <ul type="none">
+                                  <li class="p-2">
+                                    <%= assets[assets.length-1][user].name %> :
+                                    <%= assets[assets.length-1][user].id %>
+                                  </li>
+                                </ul>
+                                <% } %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="<%=assets[i]._id%>"
+                          />
+                        </div>
+                        <div class="col-md-8 mb-3 m-auto mt-2">
+                          <label
+                            for="validationDefault01"
+                            class="form-label d-flex flex-direction-row justify-content-start"
+                            >Enter Employee ID</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            userId="validationDefault01"
+                            name="userId"
+                            autocomplete="off"
+                            required
+                          />
+                        </div>
+                        <div class="pt-5 pb-4">
+                          <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary m-2">
+                            Save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
-          <!--Delete Modal -->
-          <form action="/assets/delete" method="POST">
+              <!--Delete Modal -->
+              <div
+                class="modal fade"
+                id="delete0<%= assets[i]._id %>"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="pending1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div
+                    class="modal-content"
+                  >
+                    <div class="modal-body pt-5">
+                      <form class="row" action="/assets/delete" method="POST">
+                        <div class="form-group">
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="<%=assets[i]._id%>"
+                          />
+                        </div>
+
+                        <div class="col-md-8 mb-3 m-auto">
+                          <label
+                            for="validationDefault00"
+                            class="form-label d-flex flex-direction-row justify-content-start"
+                            >Enter password</label
+                          >
+                          <input
+                            type="password"
+                            placeholder="Password"
+                            class="form-control passwordField"
+                            password="validationDefault00"
+                            name="password"
+                            autocomplete="off"
+                            minlength="6"
+                            id="delPassInput<%=assets[i]._id%>"
+                            required
+                          />
+                          <% if (err && err.deleteUnassignedAsset && err.id ===
+                          String(assets[i]._id)) { %>
+                          <div class="unAssigndelPassError mt-2">
+                            <p class="d-flex flex-direction-row justify-content-start text-danger">
+                              <%= err.message %>
+                            </p>
+                            <% } %>
+                          </div>
+                        </div>
+
+                        <div
+                          class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-4"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            data-bs-dismiss="modal"
+                            id="deleteCancelBtn<%=assets[i]._id%>"
+                          >
+                            Cancel
+                          </button>
+                          <button type="submit" class="btn btn-primary m-2">
+                            Delete
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- responsive to the mobile and tab -->
+    <div class="d-block d-lg-none">
+      <div class="m-2">
+        <table class="">
+          <% for (var i = 0; i < assets.length-1; i++) { %>
+          <tr class="mt-3">
+            <th class="">S.NO.</th>
+            <th class="information"><%= i + 1 %></th>
+          </tr>
+          <tr>
+            <td>Asset</td>
+            <td class="information">
+              <a class="anchorBtn" href="/usersHistory/<%= assets[i]._id %>">
+                <button type="submit" class="assetBtn">
+                  <%= assets[i].name %>
+                </button>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="description">Description</td>
+            <td class="information" title="<%= assets[i].description %>">
+              <button
+                class="btn btn-secondary aboutBtn"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseExample12<%= i + 1 %>"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                About<i class="fa-solid fa-angle-down p-2"></i>
+              </button>
+
+              <div
+                class="collapse mt-2 text-center"
+                id="collapseExample12<%= i + 1 %>"
+              >
+                <div class="card card-body"><%= assets[i].description %></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="desc">Action</td>
+            <td class="information">
+              <% if(assets[i].status === 'waiting'){ %>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#pending1<%= assets[i]._id %>"
+                id="pendingBtn1<%= assets[i]._id %>"
+              >
+                Pending
+              </button>
+              <% } else{ %>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#request1<%= assets[i]._id %>"
+                id="requestBtn1<%= assets[i]._id %>"
+              >
+                Request
+              </button>
+
+              <% } %>
+              <button
+                type="button"
+                data-bs-toggle="modal"
+                class="btn btn-link"
+                data-bs-target="#delete01<%= assets[i]._id %>"
+                id="deleteBtn01<%= assets[i]._id %>"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+            <!--Pending Modal -->
+              <div
+                class="modal fade"
+                id="pending1<%= assets[i]._id %>"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="pending"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body pt-5 p-5">
+                      <form class="row" action="/updateAssets" method="POST">
+                        <div class="form-group">
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="<%=assets[i]._id%>"
+                          />
+                        </div>
+
+                        <div class="mb-3">
+                          <label
+                            for="validationDefault02"
+                            class="form-label d-flex flex-direction-row justify-content-start"
+                            >Enter password</label
+                          >
+                          <input
+                            type="password"
+                            placeholder="Password"
+                            class="form-control"
+                            password="validationDefault02"
+                            name="password"
+                            autocomplete="off"
+                            minlength="6"
+                            id="pendingPasswordInput1<%=assets[i]._id%>"
+                            required
+                          />
+                          <% if (err && err.assignToTheIdInMbl && err.id ===
+                          String(assets[i]._id)) { %>
+                          <div class="pendingPasswordError mt-2">
+                            <p class="d-flex flex-direction-row justify-content-start text-danger">
+                              <%= err.message %>
+                            </p>
+                            <% } %>
+                          </div>
+                        </div>
+
+                        <div
+                          class="d-flex flex-direction-row justify-content-center align-items-center pb-4"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            data-bs-dismiss="modal"
+                            id="pendingCloseBtn1<%=assets[i]._id%>"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary m-2">
+                            Save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!--Request Modal -->
+              <div
+                class="modal fade requesForm"
+                id="request1<%= assets[i]._id %>"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body pt-5">
+                      <form class="row" action="/updateAssets" method="POST">
+                        <div class="accordion" id="myAccordion">
+                          <div class="panel d-flex flex-direction-row justify-content-center mb-4">
+                            <button
+                              type="button"
+                              class="btn"
+                              data-toggle="collapse"
+                              data-target="#collapsible-2<%=assets[i]._id%>"
+                              data-parent="#myAccordion"
+                            >
+                              <i
+                                class="fa fa-info-circle info-icon"
+                                aria-hidden="false"
+                              ></i
+                              ><span class="info-btn"
+                                >Click the Icon for ID's</span
+                              >
+                            </button>
+                            </div>
+                            <div
+                              id="collapsible-2<%=assets[i]._id%>"
+                              class="collapse employeeDataContainer"
+                            >
+                              <div>
+                                <% for (var user = 0; user <
+                                (assets[assets.length-1]).length; user++) { %>
+                                <ul type="none">
+                                  <li class="p-2">
+                                    <%= assets[assets.length-1][user].name %> :
+                                    <%= assets[assets.length-1][user].id %>
+                                  </li>
+                                </ul>
+                                <% } %>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="<%=assets[i]._id%>"
+                          />
+                        </div>
+                        <div class="col-md-8 mb-3 m-auto p-2">
+                          <label
+                            for="validationDefault01"
+                            class="form-label d-flex flex-direction-row justify-content-start"
+                            >Enter Employee ID</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            userId="validationDefault01"
+                            name="userId"
+                            autocomplete="off"
+                            required
+                          />
+                        </div>
+                        <div class="d-flex flex-direction-row justify-content-center align-items-center mb-3 pt-3">
+                          <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary m-2">
+                            Save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!--Delete Modal -->
             <div
               class="modal fade"
-              id="delete<%= i + 1 %>"
+              id="delete01<%= assets[i]._id %>"
               data-bs-backdrop="static"
               data-bs-keyboard="false"
               tabindex="-1"
@@ -318,21 +645,21 @@
               aria-hidden="true"
             >
               <div class="modal-dialog">
-                <div
-                  class="modal-content d-flex flex-direction-row justify-content-center"
-                >
-                  <div class="modal-body pt-5">
-                    <form class="row">
+                <div class="modal-content">
+                  <div class="modal-body pt-5 p-5">
+                    <form class="row" action="/assets/delete" method="POST">
                       <div class="form-group">
-                        <input type="hidden" name="id" value="<%=assets[i]._id%>" />
+                        <input
+                          type="hidden"
+                          name="id"
+                          value="<%=assets[i]._id%>"
+                        />
                       </div>
-
-                      <div class="col-md-8 mb-3 m-3 m-auto">
+                      <div>
                         <label
                           for="validationDefault00"
                           class="form-label inputPassword"
-                          >Enter password</label
-                        >
+                          >Enter password</label>
                         <input
                           type="password"
                           placeholder="Password"
@@ -341,17 +668,26 @@
                           name="password"
                           autocomplete="off"
                           minlength="6"
+                          id="delPassInput01<%=assets[i]._id%>"
                           required
                         />
-                      </div>
+                        <% if (err && err.deleteUnassignedAssetInMbl && err.id ===
+                        String(assets[i]._id)) { %>
+                        <div class="unAssigndelPassError mt-2">
+                          <p class="d-flex flex-direction-row justify-content-start text-danger">
+                            <%= err.message %>
+                          </p>
+                          <% } %>
+                        </div>
 
                       <div
-                        class="d-flex flex-direction-row justify-content-center align-items-center pt-5 pb-4"
+                        class="d-flex flex-direction-row justify-content-center align-items-center mb-2 pt-3"
                       >
                         <button
                           type="button"
                           class="btn btn-secondary m-2"
                           data-bs-dismiss="modal"
+                          id="deleteCancelBtn01<%=assets[i]._id%>"
                         >
                           Cancel
                         </button>
@@ -364,19 +700,65 @@
                 </div>
               </div>
             </div>
-          </form>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </div>
+          </tr>
+          <% } %>
+        </table>
+      </div>
+    </div>
 
-<!-- /Main Site -->
-</main>
-
-<!-- include footer -->
-<%- include('include/footer') %>
-<!-- /include footer -->
-
-</body>
+  </body>
+  <script>
+    if (window.innerWidth > 900) {
+      <% if (err && err.assignToTheId) { %>
+      window.onload = () => {
+          $('#pending<%= err.id %>').modal('show');
+        }
+    
+      $('#pendingCloseBtn<%= err.id %>').on('click', function() {
+        document.getElementById("pendingPasswordInput<%=err.id%>").value = '';
+        $('.pendingPasswordError').hide();
+      });
+        
+    <% } %>
+    
+    
+    <% if (err && err.deleteUnassignedAsset) { %> 
+      window.onload = () => {
+          $('#delete0<%= err.id %>').modal('show');
+        }
+    
+    $('#deleteCancelBtn<%= err.id %>').on('click', function() {
+      document.getElementById("delPassInput<%=err.id%>").value = '';
+      $('.unAssigndelPassError').hide();
+    });
+        
+    <% } %>
+  
+  } else {
+    <% if (err && err.assignToTheIdInMbl) { %>
+      window.onload = () => {
+          $('#pending1<%= err.id %>').modal('show');
+        }
+    
+      $('#pendingCloseBtn1<%= err.id %>').on('click', function() {
+        document.getElementById("pendingPasswordInput1<%=err.id%>").value = '';
+        $('.pendingPasswordError').hide();
+      });
+        
+    <% } %>
+  
+    <% if (err && err.deleteUnassignedAssetInMbl) { %> 
+      window.onload = () => {
+          $('#delete01<%= err.id %>').modal('show');
+        }
+    
+    $('#deleteCancelBtn01<%= err.id %>').on('click', function() {
+      document.getElementById("delPassInput01<%=err.id%>").value = '';
+      $('.unAssigndelPassError').hide();
+    });
+        
+    <% } %>
+  
+  }
+</script>
 </html>

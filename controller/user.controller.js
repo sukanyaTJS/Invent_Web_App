@@ -69,7 +69,10 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     if (!req.body.password || req.body.password !== process.env.PASSWORD) {
-      res.render("error404");
+      let err = {
+        msg: "Password doesn't match",
+      };
+      res.render("index", { err });
     } else {
       const user = await User.findOneAndUpdate(
         { id: req.body.userId },
